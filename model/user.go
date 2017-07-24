@@ -466,7 +466,7 @@ func (u *User) IsSSOUser() bool {
 }
 
 func (u *User) IsOAuthUser() bool {
-	return u.AuthService == USER_AUTH_SERVICE_GITLAB
+	return u.AuthService == USER_AUTH_SERVICE_GITLAB || u.AuthService == USER_AUTH_SERVICE_OIDC
 }
 
 func (u *User) IsLDAPUser() bool {

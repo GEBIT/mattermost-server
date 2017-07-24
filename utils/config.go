@@ -461,6 +461,7 @@ func getClientConfig(c *model.Config) map[string]string {
 	props["EmailNotificationContentsType"] = *c.EmailSettings.EmailNotificationContentsType
 
 	props["EnableSignUpWithGitLab"] = strconv.FormatBool(c.GitLabSettings.Enable)
+	props["EnableSignUpWithOidc"] = strconv.FormatBool(c.OidcSettings.Enable)
 
 	props["ShowEmailAddress"] = strconv.FormatBool(c.PrivacySettings.ShowEmailAddress)
 
@@ -656,8 +657,13 @@ func Desanitize(cfg *model.Config) {
 		cfg.GitLabSettings.Secret = Cfg.GitLabSettings.Secret
 	}
 
+	if cfg.OidcSettings.Secret == model.FAKE_SETTING {
+		cfg.OidcSettings.Secret = Cfg.OidcSettings.Secret
+	}
+
 	if *cfg.SqlSettings.DataSource == model.FAKE_SETTING {
 		*cfg.SqlSettings.DataSource = *Cfg.SqlSettings.DataSource
+
 	}
 	if cfg.SqlSettings.AtRestEncryptKey == model.FAKE_SETTING {
 		cfg.SqlSettings.AtRestEncryptKey = Cfg.SqlSettings.AtRestEncryptKey

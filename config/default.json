@@ -203,6 +203,15 @@
         "TokenEndpoint": "",
         "UserApiEndpoint": ""
     },
+    "OidcSettings": {
+        "Enable": false,
+        "Secret": "",
+        "Id": "",
+        "Scope": "",
+        "AuthEndpoint": "",
+        "TokenEndpoint": "",
+        "UserApiEndpoint": ""
+    },
     "GoogleSettings": {
         "Enable": false,
         "Secret": "",

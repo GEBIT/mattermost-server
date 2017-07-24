@@ -343,6 +343,7 @@ func trackConfig() {
 
 	SendDiagnostic(TRACK_CONFIG_OAUTH, map[string]interface{}{
 		"enable_gitlab":    utils.Cfg.GitLabSettings.Enable,
+		"enable_oidc":      utils.Cfg.OidcSettings.Enable,
 		"enable_google":    utils.Cfg.GoogleSettings.Enable,
 		"enable_office365": utils.Cfg.Office365Settings.Enable,
 	})
