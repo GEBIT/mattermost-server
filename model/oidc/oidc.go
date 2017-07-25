@@ -8,7 +8,6 @@ import (
 	"github.com/mattermost/mattermost-server/einterfaces"
 	"github.com/mattermost/mattermost-server/model"
 	"io"
-	"strconv"
 	"strings"
 )
 
@@ -16,7 +15,7 @@ type OidcProvider struct {
 }
 
 type OidcUser struct {
-	Id      	int64  `json:"sub"`
+	Id      	string `json:"sub"`
 	Name       	string `json:"name"`
 	GivenName  	string `json:"given_name"`
 	FamilyName 	string `json:"family_name"`
@@ -40,7 +39,7 @@ func userFromOidcUser(glu *OidcUser) *model.User {
 	user.LastName = glu.FamilyName
 	strings.TrimSpace(user.Email)
 	user.Email = glu.Email
-	userId := strconv.FormatInt(glu.Id, 10)
+	userId := glu.Id
 	user.AuthData = &userId
 	user.AuthService = model.USER_AUTH_SERVICE_OIDC
 
@@ -68,7 +67,7 @@ func (glu *OidcUser) ToJson() string {
 }
 
 func (glu *OidcUser) IsValid() bool {
-	if glu.Id == 0 {
+	if glu.Id == "" {
 		return false
 	}
 
@@ -80,7 +79,7 @@ func (glu *OidcUser) IsValid() bool {
 }
 
 func (glu *OidcUser) getAuthData() string {
-	return strconv.FormatInt(glu.Id, 10)
+	return glu.Id
 }
 
 func (m *OidcProvider) GetIdentifier() string {
