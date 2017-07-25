@@ -15,11 +15,11 @@ type OidcProvider struct {
 }
 
 type OidcUser struct {
-	Id      	string `json:"sub"`
-	Name       	string `json:"name"`
-	GivenName  	string `json:"given_name"`
-	FamilyName 	string `json:"family_name"`
-	Email      	string `json:"email"`
+	Id			string `json:"sub"`
+	Username	string `json:"preferred_username"`
+	GivenName	string `json:"given_name"`
+	FamilyName	string `json:"family_name"`
+	Email		string `json:"email"`
 }
 
 func init() {
@@ -30,7 +30,7 @@ func init() {
 
 func userFromOidcUser(glu *OidcUser) *model.User {
 	user := &model.User{}
-	username := glu.Name
+	username := glu.Username
 	if username == "" {
 		username = glu.Email
 	}
