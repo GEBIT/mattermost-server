@@ -15,18 +15,17 @@ type OidcProvider struct {
 }
 
 type OidcUser struct {
-	Id			string `json:"sub"`
-	Username	string `json:"preferred_username"`
-	GivenName	string `json:"given_name"`
-	FamilyName	string `json:"family_name"`
-	Email		string `json:"email"`
+	Id         string `json:"sub"`
+	Username   string `json:"preferred_username"`
+	GivenName  string `json:"given_name"`
+	FamilyName string `json:"family_name"`
+	Email      string `json:"email"`
 }
 
 func init() {
 	provider := &OidcProvider{}
 	einterfaces.RegisterOauthProvider(model.USER_AUTH_SERVICE_OIDC, provider)
 }
-
 
 func userFromOidcUser(glu *OidcUser) *model.User {
 	user := &model.User{}
